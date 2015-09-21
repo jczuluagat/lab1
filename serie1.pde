@@ -1,4 +1,4 @@
-boolean abundant(int n){
+boolean modulo(int n){
  int div;
  int i;
  int aux=0;
@@ -17,18 +17,27 @@ boolean abundant(int n){
   //s=true;
   // return s;
 }
+
 boolean m;
 int e;
-int serie;
+int cont=0;
+int[] serie;
+int max;
 //int F=51;
 //int m;
 //int ancho;
 void setup(){ 
+  serie= new int [50];
+  
  //size(500,500);
-     for(e=0;e<50;e++){
-         m=abundant(e);
+     for(e=0;e<70;e++){
+         m=modulo(e);
            if (m==true){
-              serie.append(e);}
+              serie[cont]=e;
+          printArray(serie[cont]);  
+          cont=cont+1;}       
+           else {
+         cont=cont;}
  }
  
  //ancho=width/(abundant(12));
@@ -38,8 +47,10 @@ void setup(){
   //rect(l*ancho,0,ancho, 50);
   //rect(0,0,l*ancho,l*ancho);
   //}
-  printArray(serie);
+  
+  
 }
+
 //void draw(){
 //printArray(serie);
 //}
