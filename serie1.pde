@@ -10,13 +10,14 @@ boolean modulo(int n){
    }
    else{
    aux=aux+0;
-   }   
+}
  }
  return aux>n;
  //if(aux>n)
   //s=true;
   // return s;
 }
+
 
 boolean m;
 int e;
@@ -27,14 +28,18 @@ int max;
 //int m;
 //int ancho;
 void setup(){ 
+  
   serie= new int [50];
   
- //size(500,500);
-     for(e=0;e<70;e++){
+  size(500,500);
+  background(0.26,51);
+    for(e=0;e<100;e++){
          m=modulo(e);
            if (m==true){
               serie[cont]=e;
-          printArray(serie[cont]);  
+          //printArray(serie[cont]);
+          ellipse(250,250,100,5*serie[cont]);
+          fill(map(serie[cont],0,cont,0,255),map(40*serie[cont],0,cont,0,255),100,70);
           cont=cont+1;}       
            else {
          cont=cont;}
