@@ -1,4 +1,5 @@
 //Función para detectar los numeros abundantes (retorna si el numero es o no abundante)
+
 boolean modulo(int n){
  int div;
  int i;
@@ -25,16 +26,7 @@ int tamserie(int n)
   return tamano;
 }
 
-int nfig, tamfig;//Ajusta el tamaño de las figuras que se quieren ver en pantalla
-//CONFIGURACIÓN GENERAL
-void setup() {
-  nfig=2;
-  size(900, 500);//Definimos el tamaño de la ventana gráfica (alargada porque son varias figuras)(ancho, alto)
-  tamfig = width/nfig;//Escogemos la cantidad de figuras = 2
-  colorMode(HSB, 360, 100, 100);//escogemos los rangos de matiz, saturación y brillo
-  ellipseMode(CORNER);//Definimos la posición desde la cual se ejecutará el draw(desde donde pintar)
-  frameRate(10);//Esta función controla la velocidad de actualización o ejecución de la gráfica
-}
+
 //COLOR DE FONDO Y DIMENSIONES DE LA FIGURA
 void draw() 
 {
@@ -45,9 +37,16 @@ void draw()
     //height/3 controla la posición vertical
   } 
 }
-
-
-
+int nfig, tamfig;//Ajusta el tamaño de las figuras que se quieren ver en pantalla
+void setup() {
+ 
+  nfig=1;
+  size(900, 900);//Definimos el tamaño de la ventana gráfica (alargada porque son varias figuras)(ancho, alto)
+  tamfig = width/nfig;//Escogemos la cantidad de figuras = 2
+  colorMode(HSB, 360, 100, 100);//escogemos los rangos de matiz, saturación y brillo
+  ellipseMode(CORNER);//Definimos la posición desde la cual se ejecutará el draw(desde donde pintar)
+  frameRate(10);//Esta función controla la velocidad de actualización o ejecución de la gráfica
+}
 //FUNCIÓN DE PINTAR
 void pintar(float x, float y) 
 {
@@ -59,6 +58,8 @@ void pintar(float x, float y)
   float llenar = random(0, 360); 
   //-------------------------------------------------------/
   
+  
+  
   //--------------------------------------------------------/
   //Creamos un vector con el tamaño de la serie para un valor max de 360
   int t=tamserie(radio);
@@ -66,6 +67,8 @@ void pintar(float x, float y)
   serie= new int [t] ;
   //--------------------------------------------------------/
     
+  
+  
   //Ciclo para dibujar
   int i,suma,gama;//Variables para control de la serie
   suma=0;
@@ -81,10 +84,12 @@ void pintar(float x, float y)
       i++;
       //suma+=cont;
       suma+=1;
-      ellipse(x, suma, cont, cont);
+      ellipse(x, suma, cont/2, cont/2);//Graficamos una elipse apartir de una esquina y variamos los radios
     }
-    //ellipse(x, y, cont, cont);//Graficamos una elipse apartir de una esquina y variamos los radios
-    llenar = (llenar + 1) % 360;//Modificamos la variable llenar para que varíe el tono degradado
+    else ellipse(4*suma, suma, cont, cont/2);//Graficamos un cono con base circular
+    
+    
+    llenar = (llenar + 1) % 360;//Modificamos la variable llenar para que varíe el tono degradado (esta línea fué tomada directamente del ejemplo "radialGradient").
     
   }
 }
