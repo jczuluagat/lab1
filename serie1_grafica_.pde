@@ -27,16 +27,6 @@ int tamserie(int n)
 }
 
 
-//COLOR DE FONDO Y DIMENSIONES DE LA FIGURA
-void draw() 
-{
-  background(65,31,0);//Escogemos el color para el fondo de la pantalla color(matiz), saturación y brillo
-  for (int posx = 0; posx <= width; posx+=tamfig) //Delimitamos el tamaño de nuestras figuras
-  {
-    pintar(posx, height);//es nuestra función de graficar, le enviamos los tamaños en x y y
-    //height/3 controla la posición vertical
-  } 
-}
 int nfig, tamfig;//Ajusta el tamaño de las figuras que se quieren ver en pantalla
 void setup() {
  
@@ -48,10 +38,10 @@ void setup() {
   frameRate(10);//Esta función controla la velocidad de actualización o ejecución de la gráfica
 }
 //FUNCIÓN DE PINTAR
-void pintar(float x, float y) 
+void pintar(float x) 
 {
-  int radio = tamfig/2;//Radio de la figura (numero de figuras dividido 4)
-  int acumulado=0;
+  int radio = tamfig/2;//Radio de la figura (numero de figuras dividido 2)
+  //int acumulado=0;
   //--------------------------------------------------------/
   //Variable auxiliar que va cambiando para redibujar y generar sensación visual de movimiento
   //Inicia en un valor aleatorio entre 0 y 360 para los colores
@@ -70,26 +60,37 @@ void pintar(float x, float y)
   
   
   //Ciclo para dibujar
-  int i,suma,gama;//Variables para control de la serie
+  int i,suma;//Variables para control de la serie
   suma=0;
   i=0;
-  gama=0;
-  for (int cont=0 ; cont < radio; ++cont) //-- para que grafique de afuera hacia adentro
+  //gama=0;
+  for (int cont=0 ; cont < radio; ++cont) // para que grafique de dentro hacia afuera
   {
     fill(llenar, 90, 90);//Definimos como queremos que se llene la figura.
     if (modulo(cont))
     {
-      serie[i]=cont;
+      serie[i]=cont; // se llena el arreglo con la serie de números abundantes hasta el valor de "radio"
       print(serie[i],",");
       i++;
       //suma+=cont;
-      suma+=1;
-      ellipse(x, suma, cont/2, cont/2);//Graficamos una elipse apartir de una esquina y variamos los radios
+      suma+=1; //suma los npumeros abundantes obtenidos
+      ellipse(x, suma, cont/2, cont/2);//Graficamos una circunferencia con la serie obtenida que define el ancho y al alto 
     }
-    else ellipse(4*suma, suma, cont, cont/2);//Graficamos un cono con base circular
+    else ellipse(4*suma, suma, cont, cont/2);//Graficamos un cono con base elíptica definido por los números no abundantes
     
     
     llenar = (llenar + 1) % 360;//Modificamos la variable llenar para que varíe el tono degradado (esta línea fué tomada directamente del ejemplo "radialGradient").
     
   }
+}
+
+//COLOR DE FONDO Y DIMENSIONES DE LA FIGURA
+void draw() 
+{
+  background(65,31,0);//Escogemos el color para el fondo de la pantalla color(matiz), saturación y brillo
+  for (int posx = 0; posx <= width; posx+=tamfig) //Delimitamos el tamaño de nuestras figuras
+  {
+    pintar(posx);//es nuestra función de graficar, le enviamos la posición a graficar en x
+    
+  } 
 }
